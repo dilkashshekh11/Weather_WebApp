@@ -1,5 +1,5 @@
 // Paste your OpenWeather API key below (https://openweathermap.org/api).
-const API_KEY = "9232a97d03a12ac4edcc4eae1084e4b4";
+const API_KEY = "Paste_Your_Own_OpenWeather_API_Key";
 
 const $ = (s) => document.querySelector(s);
 const form = $("#search-form"), input = $("#city-input"), statusEl = $("#status");
