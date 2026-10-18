@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather Now</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-sky="clear" data-theme="dark">
+  <div class="grid-bg" aria-hidden="true"></div>
+  <canvas id="fx" aria-hidden="true"></canvas>
+  <main class="hud">
+    <header class="bar">
+      <h1>Weather Now</h1>
+      <div class="clock" id="clock" aria-label="Local time at city">--:--</div>
+      <button type="button" id="theme" class="icon-btn" aria-label="Switch between light and dark theme" title="Light / dark">◐</button>
+      <div class="unit" role="group" aria-label="Units">
+        <button type="button" data-unit="metric" class="on">°C</button>
+        <button type="button" data-unit="imperial">°F</button>
+      </div>
+    </header>
+
+    <form id="search-form" class="search panel" autocomplete="off">
+      <label class="sr-only" for="city-input">City name</label>
+      <input id="city-input" type="text" placeholder="Search a city, e.g. Kathmandu" required />
+      <button type="button" id="locate" title="Use my location" aria-label="Use my location">⌖</button>
+      <button type="submit" id="go">Search</button>
+      <ul id="suggest" class="suggest hidden" role="listbox"></ul>
+    </form>
+    <div id="recent" class="recent"></div>
+    <p id="status" class="status" role="status">Search a city or press ⌖ to scan your location.</p>
+
+    <div id="dash" class="dash hidden">
+      <div id="alerts" class="alerts" role="alert"></div>
+      <section class="panel hero">
+        <p id="location" class="location"></p>
+        <p id="description" class="desc"></p>
+        <div id="chips" class="chips"></div>
+        <div class="gauge">
+          <svg viewBox="0 0 200 200" aria-hidden="true">
+            <circle class="track" cx="100" cy="100" r="86" />
+            <circle id="ring" class="ring" cx="100" cy="100" r="86" />
+          </svg>
+          <div class="gauge-in">
+            <span id="icon" class="icon">🌤️</span>
+            <span id="temperature" class="temp">--</span>
+            <span id="feels" class="feels"></span>
+          </div>
+        </div>
+        <p class="hilo"><span id="hi"></span> high &nbsp;/&nbsp; <span id="lo"></span> low</p>
+      </section>
+
+      <section class="panel metrics">
+        <div class="m"><span>Humidity</span><strong id="humidity"></strong><i class="bar-s"><b id="humBar"></b></i></div>
+        <div class="m"><span>Wind</span><strong id="wind"></strong>
+          <svg class="compass" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="17" /><path id="arrow" d="M20 6 L25 22 L20 19 L15 22 Z" /></svg>
+          <em id="windDir"></em></div>
+        <div class="m"><span>Pressure</span><strong id="pressure"></strong></div>
+        <div class="m"><span>Visibility</span><strong id="visibility"></strong></div>
+        <div class="m"><span>Clouds</span><strong id="clouds"></strong><i class="bar-s"><b id="cloudBar"></b></i></div>
+        <div class="m"><span>Air quality</span><strong id="aqi"></strong><i class="bar-s"><b id="aqiBar"></b></i></div>
+        <div class="m wide"><span>Daylight</span>
+          <div class="sun"><small id="rise"></small><i class="bar-s"><b id="sunBar"></b></i><small id="set"></small></div></div>
+      </section>
+
+      <section class="panel hourly">
+        <h2>Next 24 hours</h2>
+        <div class="chart-wrap"><svg id="chart" viewBox="0 0 640 150" preserveAspectRatio="none" role="img" aria-label="Temperature trend for the next 24 hours"></svg>
+        <div id="hours" class="hours"></div></div>
+      </section>
+
+      <section class="panel daily">
+        <h2>Last 7 days and next 7 days</h2>
+        <div class="chart-wrap"><svg id="trend" viewBox="0 0 900 170" role="img" aria-label="Daily high and low temperature for the past 7 and next 7 days"></svg></div>
+        <div id="days" class="days"></div>
+      </section>
+    </div>
+    <p class="footnote">Data: OpenWeather and Open-Meteo</p>
+  </main>
+  <script src="fx.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
